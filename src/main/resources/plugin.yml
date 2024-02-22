@@ -12,6 +12,7 @@ authors:
 - Deej
 - VoChiDanh
 - alyphen
+- Quamsy
 version: @version@
 main: com.dansplugins.factionsystem.MedievalFactions
 api-version: 1.17
@@ -92,9 +93,9 @@ commands:
   power:
     description: |
       Power management command
-      /power set [player] [power] - Sets a player's power.
+      /power [set|add] [player] [power] - Sets a player's power.
     aliases: [macht, pouvoir]
-    usage: /<command> [set]
+    usage: /<command> [set|add]
   gate:
     description: |
       Gate management command
@@ -279,6 +280,9 @@ permissions:
     default: true
   mf.power.set:
     description: Allows setting player power
+    default: op
+  mf.power.add:
+    description: Allows adding power to a player.
     default: op
   mf.sethome:
     description: Allows you to set your faction's home location
