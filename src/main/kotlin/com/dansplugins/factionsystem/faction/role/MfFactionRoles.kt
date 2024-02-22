@@ -17,10 +17,10 @@ data class MfFactionRoles(
 
     companion object {
         fun defaults(plugin: MedievalFactions, factionId: MfFactionId): MfFactionRoles {
-            val member = MfFactionRole(plugin, name = "Member")
+            val member = MfFactionRole(plugin, name = "♟ Citizen")
             val officer = MfFactionRole(
                 plugin,
-                name = "Officer",
+                name = "♞ Knight",
                 permissionsByName = buildMap {
                     put(plugin.factionPermissions.requestAlliance.name, true)
                     put(plugin.factionPermissions.declareWar.name, true)
@@ -55,7 +55,7 @@ data class MfFactionRoles(
             val owner = MfFactionRole(
                 plugin,
                 id = ownerId,
-                name = "Owner",
+                name = "♛ King",
                 permissionsByName = buildMap {
                     put(plugin.factionPermissions.addLaw.name, true)
                     put(plugin.factionPermissions.editLaw.name, true)

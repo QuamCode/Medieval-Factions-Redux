@@ -58,7 +58,7 @@ class MfFactionCreateCommand(private val plugin: MedievalFactions) : CommandExec
                 }
                 val factionId = MfFactionId.generate()
                 val roles = MfFactionRoles.defaults(plugin, factionId)
-                val owner = roles.single { it.name == "Owner" }
+                val owner = roles.single { it.name == "♛ King" }
                 val faction = MfFaction(plugin, id = factionId, name = factionName, roles = roles, members = listOf(mfPlayer.withRole(owner)))
                 val createdFaction = factionService.save(faction).onFailure { failure ->
                     sender.sendMessage("$RED${plugin.language["CommandFactionCreateFactionFailedToSave"]}")

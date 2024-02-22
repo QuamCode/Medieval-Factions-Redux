@@ -1,7 +1,6 @@
 package com.dansplugins.factionsystem.command.power.add
 
 import com.dansplugins.factionsystem.MedievalFactions
-import com.dansplugins.factionsystem.player.MfPlayer
 import dev.forkhandles.result4k.onFailure
 import org.bukkit.ChatColor.GREEN
 import org.bukkit.ChatColor.RED
@@ -18,7 +17,12 @@ class MfPowerAddCommand(private val plugin: MedievalFactions) : CommandExecutor,
 
     private val decimalFormat = DecimalFormat("0.##", DecimalFormatSymbols.getInstance(plugin.language.locale))
 
-    override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
+    override fun onCommand(
+        sender: CommandSender,
+        command: Command,
+        label: String,
+        args: Array<out String>
+    ): Boolean {
         if (!sender.hasPermission("mf.power.add")) {
             sender.sendMessage("$RED${plugin.language["CommandPowerAddNoPermission"]}")
             return true
@@ -41,7 +45,9 @@ class MfPowerAddCommand(private val plugin: MedievalFactions) : CommandExecutor,
         plugin.server.scheduler.runTaskAsynchronously(plugin, Runnable {
             val playerService = plugin.services.playerService
             val targetMfPlayer = playerService.getPlayer(target)
-                ?: return@Runnable sender.sendMessage("$RED${plugin.language["CommandPowerAddFailedToFindPlayer"]}")
+                ?: return@Runnable sender.sendMessage(
+                    "$RED${plugin.language["CommandPowerAddFailedToFindPlayer"]}"
+                )
 
             val newPower = (targetMfPlayer.power + powerToAdd).coerceAtMost(plugin.config.getDouble("players.maxPower"))
             playerService.save(targetMfPlayer.copy(power = newPower)).onFailure {
@@ -67,12 +73,13 @@ class MfPowerAddCommand(private val plugin: MedievalFactions) : CommandExecutor,
         command: Command,
         label: String,
         args: Array<out String>
-    ) = when {
-        args.isEmpty() -> plugin.server.offlinePlayers.mapNotNull { it.name }
-        args.size == 1 -> plugin.server.offlinePlayers.filter {
-            it.name?.lowercase()?.startsWith(args[0].lowercase()) == true
-        }.mapNotNull { it.name }
-
-        else -> emptyList()
+    ): List<String> {
+        return when {
+            args.isEmpty() -> plugin.server.offlinePlayers.mapNotNull { it.name }
+            args.size == 1 -> plugin.server.offlinePlayers.filter {
+                it.name?.lowercase()?.startsWith(args[0].lowercase()) == true
+            }.mapNotNull { it.name }
+            else -> emptyList()
+        }
     }
 }

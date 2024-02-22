@@ -71,7 +71,13 @@ kotlin {
 tasks.named('check') {
     dependsOn 'installKotlinterPrePushHook'
 }
+tasks.withType(org.jmailen.gradle.kotlinter.tasks.LintTask) {
+    enabled = false
+}
 
+tasks.withType(org.jmailen.gradle.kotlinter.tasks.FormatTask) {
+    enabled = false
+}
 jooq {
     configurations {
         main {

@@ -1,8 +1,8 @@
 package com.dansplugins.factionsystem.command.power
 
 import com.dansplugins.factionsystem.MedievalFactions
-import com.dansplugins.factionsystem.command.power.set.MfPowerSetCommand
 import com.dansplugins.factionsystem.command.power.add.MfPowerAddCommand
+import com.dansplugins.factionsystem.command.power.set.MfPowerSetCommand
 import org.bukkit.ChatColor.RED
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
